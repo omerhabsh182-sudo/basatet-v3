@@ -11,6 +11,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Extract project from zip
+        run: |
+          if [ -f basatet-v3.zip ]; then
+            unzip -o basatet-v3.zip
+            if [ -d basatet-v3 ]; then
+              shopt -s dotglob
+              cp -r basatet-v3/* .
+            fi
+          fi
+          ls -la
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
